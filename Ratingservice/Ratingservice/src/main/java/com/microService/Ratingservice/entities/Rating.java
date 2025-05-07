@@ -4,14 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@JsonIgnoreProperties(ignoreUnknown = true)
+
+@RequiredArgsConstructor
+@Data
 @Entity
-@Table(name = "rating_service")
+@Table(name = "ratings")
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +17,5 @@ public class Rating {
     private int hotelId;
     private  int rating;
     private  String feedback;
-
 
 }

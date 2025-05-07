@@ -8,12 +8,12 @@ public interface HotelService {
 
     //create
 
-    Hotel create(Hotel hotel);
+    Hotel addHotel(Hotel hotel);
 
     //get all
     List<Hotel> getAll();
 
     //get single
-    Hotel get(int id);
+    Hotel getHotelById(int id);
 
 }

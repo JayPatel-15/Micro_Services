@@ -1,12 +1,8 @@
 package com.microService.UserService.controllers;
 
 import com.microService.UserService.entities.User;
-import com.microService.UserService.services.Userservice;
-import io.github.bucket4j.Bucket;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import com.microService.UserService.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -14,59 +10,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private Userservice userservice;
-
-
-    @Autowired
-    private Bucket bucket;
-
+    private final UserService userservice;
 
 //    Save User
     @Transactional
-    @PostMapping("/CreateUser")
-    @CrossOrigin(origins = "http://localhost:7777")
-    public ResponseEntity<User> createUser (@RequestBody User user){
-        System.out.println("user rating and hotels"+user);
+    @PostMapping("/add-User")
+    public User createUser (@RequestBody User user){
         User Saveduser = userservice.saveUser(user);
-        System.out.println("saved User:-"+Saveduser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(Saveduser);
+        return Saveduser;
     }
 
+    //get UserById
     @GetMapping("/getUser/{userId}")
-    public ResponseEntity<User> getSingleUser(@PathVariable int userId) {
-        if (bucket.tryConsume(1)) {
-            User user = userservice.getUser(userId);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
-        }
+    public User getUserById(@PathVariable int userId) {
+            User user = userservice.getUserById(userId);
+            return user;
     }
-//    @GetMapping("/getUser/{userId}")
-//    @CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelFallback")
-////    @RateLimiter(name = "userRateLimiter", fallbackMethod = "ratingHotelFallback")
-//    public ResponseEntity<User> getSingleUser(@PathVariable int userId){
-//       User user = userservice.getUser(userId);
-//        return ResponseEntity.ok(user);
-//    }
-//
-//    public ResponseEntity<User> ratingHotelFallback(int userId, Exception ex) {
-//        ex.printStackTrace();
-//
-//        User user = new User();
-//        user.setEmail("dummy@gmail.com");
-//        user.setName("Dummy");
-//        user.setAbout("This user is created dummy because some service is down");
-//        user.setUserId(141234);
-//
-//        return new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
-//    }
 
-
-    //get all user
+    //getAllUser
     @GetMapping("/getAllUser")
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> allUser = userservice.getAllUser();

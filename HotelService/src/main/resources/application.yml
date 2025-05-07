@@ -1,36 +1,31 @@
-server:
-  port: 8083
-
-
 spring:
+  application:
+    name: HOTEL-SERVICE
+
   datasource:
-    url: jdbc:mysql://localhost:3306/microservices
-    username: root
-    password: Mysql#1234
+    url: jdbc:postgresql://localhost:5432/hotelRating
+    username: postgres
+    password: postgres#1234
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  application:
-    name: HOTEL-SERVICE
-  config:
-    import: optional:configserver:http://localhost:8071
+    properties:
+      hibernate.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8888/eureka
 
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: hotel-service-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+server:
+  port: 8083
 
-
-
-
-logging:
-  file:
-    name: "E:/JAVA MicroServices/HotelService/logs/Hotel_MicroserviceLogs.log"
+#  config:
+#    import: optional:configserver:http://localhost:8071

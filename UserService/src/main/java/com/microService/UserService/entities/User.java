@@ -1,18 +1,13 @@
 package com.microService.UserService.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Data
+@RequiredArgsConstructor
 @Entity
-@Table(name = "user_service")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -28,20 +23,4 @@ public class User {
 
     @Column(name = "About")
     private  String about;
-
-    @Transient
-    private List<Rating> ratings=new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", about='" + about + '\'' +
-                ", ratings=" + ratings +
-                '}';
-    }
-
-
 }

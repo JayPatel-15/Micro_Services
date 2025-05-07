@@ -9,7 +9,7 @@ import java.util.List;
 public interface Ratingservice {
 
     //create
-    Rating create(Rating rating);
+    Rating addRating(Rating rating);
 
 
     //get all ratings
