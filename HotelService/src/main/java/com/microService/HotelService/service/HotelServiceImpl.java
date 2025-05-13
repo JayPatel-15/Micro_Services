@@ -3,21 +3,20 @@ package com.microService.HotelService.service;
 
 import com.microService.HotelService.entities.Hotel;
 import com.microService.HotelService.respositories.HotelRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class HotelServiceImpl implements HotelService {
 
-    @Autowired
-    private HotelRepository hotelRepository;
+    private final HotelRepository hotelRepository;
 
     @Override
-    public Hotel create(Hotel hotel) {
+    public Hotel addHotel(Hotel hotel) {
         return hotelRepository.save(hotel);
     }
 
@@ -27,14 +26,13 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public Hotel get(int id) {
-//        return hotelRepository.findById(id);
-        Optional<Hotel> optionalUser = hotelRepository.findById(id);
+    public Optional<Hotel> getHotelById(int id) {
+        Optional<Hotel> User = hotelRepository.findById(id);
 
-        if (optionalUser.isPresent()) {
-            return optionalUser.get();
+        if (User.isPresent()) {
+            return User;
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 }

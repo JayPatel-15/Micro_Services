@@ -1,14 +1,11 @@
 package com.microService.UserService.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Hotel {
 
     private  int id;
@@ -16,13 +13,6 @@ public class Hotel {
     private  String location;
     private  String about;
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", about='" + about + '\'' +
-                '}';
-    }
+    private Rating rating;
+
 }

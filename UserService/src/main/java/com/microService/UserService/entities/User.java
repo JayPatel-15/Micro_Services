@@ -3,16 +3,12 @@ package com.microService.UserService.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Getter
-@Setter
+@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
-@Table(name = "user_service")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -30,18 +26,9 @@ public class User {
     private  String about;
 
     @Transient
-    private List<Rating> ratings=new ArrayList<>();
+    private Rating ratings;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", about='" + about + '\'' +
-                ", ratings=" + ratings +
-                '}';
-    }
-
+    @Transient
+    private Hotel hotel;
 
 }

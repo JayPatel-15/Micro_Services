@@ -3,17 +3,18 @@ package com.microService.HotelService.service;
 import com.microService.HotelService.entities.Hotel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface HotelService {
 
     //create
 
-    Hotel create(Hotel hotel);
+    Hotel addHotel(Hotel hotel);
 
     //get all
     List<Hotel> getAll();
 
     //get single
-    Hotel get(int id);
+     Optional<Hotel> getHotelById(int id);
 
 }

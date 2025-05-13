@@ -4,7 +4,7 @@ import com.microService.UserService.entities.User;
 
 import java.util.List;
 
-public interface Userservice {
+public interface UserService {
 
     //user operations
 
@@ -16,7 +16,7 @@ public interface Userservice {
 
     //get single user of given userId
 
-    User getUser(int userId);
+    User getUserById(int userId);
 
     //TODO: delete
     //TODO: update
