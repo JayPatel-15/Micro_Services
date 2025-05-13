@@ -1,11 +1,12 @@
 package com.microService.UserService.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
+@Builder
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -23,4 +24,11 @@ public class User {
 
     @Column(name = "About")
     private  String about;
+
+    @Transient
+    private Rating ratings;
+
+    @Transient
+    private Hotel hotel;
+
 }

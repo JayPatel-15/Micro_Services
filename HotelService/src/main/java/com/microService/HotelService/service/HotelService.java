@@ -3,6 +3,7 @@ package com.microService.HotelService.service;
 import com.microService.HotelService.entities.Hotel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface HotelService {
 
@@ -14,6 +15,6 @@ public interface HotelService {
     List<Hotel> getAll();
 
     //get single
-    Hotel getHotelById(int id);
+     Optional<Hotel> getHotelById(int id);
 
 }
