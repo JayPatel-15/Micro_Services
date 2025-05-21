@@ -21,6 +21,8 @@ A scalable, modular hotel rating system built using **Java**, **Spring Boot**, a
 | **Hotel Service**     | Handles hotel-related information.                                          |
 | **Rating Service**    | Stores and manages hotel ratings.                                           |
 
+🔗 **Config Server Repository**: [hotel-rating-system-config-server](https://github.com/JayPatel-15/hotel-rating-system-config-server)
+
 ## ✨ Features
 
 - ✅ Microservices-based architecture
