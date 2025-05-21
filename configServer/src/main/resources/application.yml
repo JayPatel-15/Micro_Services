@@ -1,16 +1,13 @@
-server:
-  port: 8071
-
 spring:
   application:
-    name: CONFIG-SERVER
+    name: config-server
 
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/JayInExture/microservices_demo_config_server.git
-          clone-on-start: true
+          uri: https://github.com/JayPatel-15/hotel-rating-system-config-server.git
+          search-paths: '*'
 
 eureka:
   instance:
@@ -20,6 +17,6 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8888/eureka
-logging:
-  level:
-    org.springframework.cloud.config: debug
+
+server:
+  port: 8071
