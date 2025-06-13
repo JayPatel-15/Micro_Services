@@ -1,0 +1,12 @@
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/Mapper/UserMapper.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/UserServiceApplication.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/clientservice/HotelClient.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/clientservice/RatingClient.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/controllers/UserController.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/controllers/ViewController.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/entities/Hotel.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/entities/Rating.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/entities/User.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/repositories/UserRepository.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/services/UserService.java
+/home/root466/Desktop/hotel-rating-system/UserService/src/main/java/com/microService/UserService/services/UserServiceImpl.java

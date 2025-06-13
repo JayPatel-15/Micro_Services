@@ -12,8 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -30,28 +34,29 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User saveUser(User user) {
         User  savedUser =  userRepository.save(user);
-        Rating rating = user.getRatings();
-        rating.setUserId(savedUser.getUserId());
-        if (user.getRatings() != null) {
 
-            Optional<Hotel> hotel = hotelClient.getHotelById(user.getRatings().getHotelId());
+        List<Rating> ratings = user.getRatings();
+        if (ratings != null && !ratings.isEmpty()) {
+        ratings.forEach(r -> r.setUserId(savedUser.getUserId()));
 
-            if(!hotel.isEmpty()){
-                Rating savedRating =  ratingClient.saveRating(rating);
+            // Check hotel existence for each rating
+            for (Rating r : ratings){
+                Optional<Hotel> hotel = hotelClient.getHotelById(r.getHotelId());
+                if (hotel.isEmpty()) {
+                    throw new IllegalArgumentException("Hotel with id " + r.getHotelId() + " does not exist. Rolling back.");
+                } else {
+                   Rating savedRating = ratingClient.saveRating(r);
 //                savedUser.setRatings(savedRating);
-                rating.setRatingId(savedRating.getRatingId());
-            } else {
-                System.out.println("Hotel with id "+ user.getRatings().getHotelId() + " does not exist. Rolling back.");
+                    ratings.forEach(rating -> rating.setRatingId(savedRating.getRatingId()));
+                }
             }
-
-
         }
 
 
 
         User userMap = UserMapper.builder()
                 .user(savedUser)
-                .ratings(rating)
+                .ratings(ratings)
                 .build()
                 .map();
         return userMap;
@@ -64,6 +69,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int userId) {
-        return userRepository.findById(userId).get();
+
+        User userDetails = userRepository.findById(userId).orElse(null);
+
+        List<Rating> ratingDetails = ratingClient.getRatings(userId).orElse(null);
+
+        List<Integer> hotelIds = ratingDetails.stream().map(r -> r.getHotelId()).collect(Collectors.toList());
+
+        List<Hotel> hotelList = hotelClient.getHotelByIds(hotelIds).orElse(Collections.emptyList());
+
+        Map<Integer,Hotel> hotelMap = hotelList.stream().collect(Collectors.toMap(Hotel::getId, Function.identity())); // <- Make sure you're using getId(), not getHotelId()
+
+
+        for (Rating r : ratingDetails){
+            Hotel hotel = hotelMap.get(r.getHotelId());
+            if (hotel != null){
+                r.setHotel(hotel);
+            }
+        }
+
+        User user = UserMapper.builder()
+                .user(userDetails)
+                .ratings(ratingDetails)
+                .build()
+                .map();
+
+        return user;
     }
 }

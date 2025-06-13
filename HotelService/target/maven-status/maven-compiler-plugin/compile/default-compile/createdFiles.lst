@@ -1,0 +1,6 @@
+com/microService/HotelService/service/HotelServiceImpl.class
+com/microService/HotelService/respositories/HotelRepository.class
+com/microService/HotelService/service/HotelService.class
+com/microService/HotelService/controller/HotelController.class
+com/microService/HotelService/HotelServiceApplication.class
+com/microService/HotelService/entities/Hotel.class

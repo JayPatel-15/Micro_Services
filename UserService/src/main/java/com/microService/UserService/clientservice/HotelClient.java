@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 
 @FeignClient(name = "HOTEL-SERVICE")
@@ -16,5 +17,8 @@ public interface HotelClient {
 
     @GetMapping("/hotel/getHotel/{hotelId}")
     Optional<Hotel> getHotelById(@PathVariable int hotelId);
+
+    @GetMapping("/hotel/getHotels/{hotelIds}")
+    Optional<List<Hotel>> getHotelByIds(@PathVariable List<Integer> hotelIds);
 }
 

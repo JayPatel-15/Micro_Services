@@ -29,6 +29,12 @@ public class HotelController {
         return hotelService.getHotelById(hotelId);
     }
 
+    //get multiple id
+    @GetMapping("/getHotels/{hotelIds}")
+    public Optional<List<Hotel>> getHotelByIds(@PathVariable List<Integer> hotelIds) {
+        return hotelService.getHotelByIds(hotelIds);
+    }
+
     //get all
     @GetMapping("/getAllHotel")
     public List<Hotel> getAll(){

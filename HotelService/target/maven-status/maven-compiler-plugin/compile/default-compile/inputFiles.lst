@@ -1,0 +1,6 @@
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/HotelServiceApplication.java
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/controller/HotelController.java
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/entities/Hotel.java
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/respositories/HotelRepository.java
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/service/HotelService.java
+/home/root466/Desktop/hotel-rating-system/HotelService/src/main/java/com/microService/HotelService/service/HotelServiceImpl.java

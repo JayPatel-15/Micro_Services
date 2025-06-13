@@ -1,7 +1,11 @@
 package com.microService.UserService.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Builder
 @Data
@@ -11,6 +15,7 @@ import lombok.*;
 @Table(name = "users")
 public class User {
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Id
     @Column(name = "User_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +30,12 @@ public class User {
     @Column(name = "About")
     private  String about;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Transient
-    private Rating ratings;
+    private List<Rating> ratings;
 
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Transient
-    private Hotel hotel;
+    private List<Hotel> hotel;
 
 }
