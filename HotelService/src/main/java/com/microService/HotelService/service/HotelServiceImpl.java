@@ -27,12 +27,18 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public Optional<Hotel> getHotelById(int id) {
-        Optional<Hotel> User = hotelRepository.findById(id);
+        Optional<Hotel> hotel = hotelRepository.findById(id);
 
-        if (User.isPresent()) {
-            return User;
+        if (hotel.isPresent()) {
+            return hotel;
         } else {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Optional<List<Hotel>> getHotelByIds(List<Integer> ids) {
+        Optional<List<Hotel>> hotels = Optional.of(hotelRepository.findHotelsByIds(ids));
+        return hotels;
     }
 }

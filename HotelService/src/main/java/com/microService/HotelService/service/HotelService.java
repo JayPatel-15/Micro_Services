@@ -17,4 +17,7 @@ public interface HotelService {
     //get single
      Optional<Hotel> getHotelById(int id);
 
+    //get multiple
+     Optional<List<Hotel>> getHotelByIds(List<Integer> ids);
+
 }

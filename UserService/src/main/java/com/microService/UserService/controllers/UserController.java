@@ -2,6 +2,7 @@ package com.microService.UserService.controllers;
 
 import com.microService.UserService.entities.User;
 import com.microService.UserService.services.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ public class UserController {
 
     //get UserById
     @GetMapping("/getUser/{userId}")
+    @CircuitBreaker(name = "ratingHotelBreaker")
     public User getUserById(@PathVariable int userId) {
             User user = userservice.getUserById(userId);
             return user;
